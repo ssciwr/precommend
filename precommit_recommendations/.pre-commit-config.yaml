@@ -1,14 +1,16 @@
 repos:
   # Run Black - the uncompromising Python code formatter
   - repo: https://github.com/psf/black
-    rev: 23.7.0
+    rev: 23.9.1
     hooks:
+      - id: black
       - id: black-jupyter
 
   # Add some general purpose useful hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
+      - id: end-of-file-fixer
       # Make sure that contained YAML files are well-formed
       - id: check-yaml
       # Trim trailing whitespace of all sorts
@@ -19,9 +21,68 @@ repos:
       - id: check-toml
       # Unify file endings
       - id: end-of-file-fixer
+      # Sort lines in requirements files
+      - id: requirements-txt-fixer
+            # Check validity of JSON files
+      - id: check-json
+      # Format JSON files consistently
+      - id: pretty-format-json
+        exclude_types:
+          - jupyter
+        args:
+          - --autofix
+      # Ensure consistent line endings
+      - id: mixed-line-ending
 
   # GitHub Actions Workflow linter
   - repo: https://github.com/rhysd/actionlint
     rev: v1.6.25
     hooks:
       - id: actionlint
+
+  # Make sure that Jupyter notebooks under version control
+  # have their outputs stripped before committing
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+        files: ".ipynb"
+
+  # CMake Formatting/Linting Utility
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+      - id: cmake-format
+      - id: cmake-lint
+
+  # Format C++ code with Clang-Format - automatically applying the changes
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v16.0.6
+    hooks:
+      - id: clang-format
+        args:
+        - --style=Mozilla
+
+  # Automatically format/sanitize setup.cfg
+  - repo: https://github.com/asottile/setup-cfg-fmt
+    rev: v2.5.0
+    hooks:
+      - id: setup-cfg-fmt
+
+  # Validate CFF format
+  - repo: https://github.com/citation-file-format/cffconvert
+    rev: main
+    hooks:
+      - id: validate-cff
+
+  # Beautify Bash scripts
+  - repo: https://github.com/lovesegfault/beautysh
+    rev: v6.2.1
+    hooks:
+      - id: beautysh
+
+  # Validate the contents of pyproject.toml
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.15
+    hooks:
+      - id: validate-pyproject

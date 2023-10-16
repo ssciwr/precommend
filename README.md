@@ -1,30 +1,26 @@
 # Welcome to precommit-recommendations
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Documentation Status](https://readthedocs.org/projects/None/badge/)](https://None.readthedocs.io/)
-[![codecov](https://codecov.io/none/None/None/branch/main/graph/badge.svg)](https://codecov.io/none/None/None)
+
+This a small utility that creates a `.pre-commit-config.yaml` based on the files
+in your current working directory and the recommendations of the Scientific Software Center.
 
 ## Installation
 
-The Python package `precommit_recommendations` can be installed from PyPI:
+The Python package can be installed with
 
 ```
-python -m pip install precommit_recommendations
+git clone https://github.com/ssciwr/precommit-recommendations.git
+cd precommit-recommendations
+python -m pip install .
 ```
 
-## Development installation
+## Usage
 
-If you want to contribute to the development of `precommit_recommendations`, we recommend
-the following editable installation from this repository:
+Head to a directory that you want to add a config file to and run
 
-```
-python -m pip install --editable .[tests]
-```
-
-Having done so, the test suite can be run using `pytest`:
-
-```
-python -m pytest
+```bash
+precommit_recommendations
 ```
 
 ## Acknowledgments

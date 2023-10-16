@@ -16,7 +16,7 @@ name = "precommit_recommendations"
 description = "Add short description here"
 readme = "README.md"
 maintainers = [
-    { name = "Dominic Kempf", email = "your@email.com" },
+    { name = "Dominic Kempf", email = "ssc@iwr.uni-heidelberg.de" },
 ]
 dynamic = ["version"]
 requires-python = ">=3.8"
@@ -28,17 +28,13 @@ classifiers = [
 ]
 dependencies = [
     "click",
+    "identify",
+    "pre-commit",
 ]
 
 [project.optional-dependencies]
 tests = [
     "pytest",
-    "pytest-cov",
-]
-docs = [
-    "sphinx",
-    "sphinx_mdinclude",
-    "sphinx_rtd_theme",
 ]
 
 # Command line scripts installed as part of the installation

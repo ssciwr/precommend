@@ -1,9 +1,22 @@
-import click
+from pre_commit.yaml import yaml_dump
+from precommit_recommendations.core import (
+    collect_hooks,
+    generate_config,
+    GenerationContext,
+)
+
+import os
 
 
-@click.command()
 def main():
-    click.echo("This is precommit_recommendations's command line interface.")
+    ctx = GenerationContext()
+    config = generate_config(collect_hooks(ctx))
+    path = os.path.join(os.getcwd(), ".pre-commit-config.yaml")
+    if os.path.exists(path):
+        raise IOError("Pre-commit config already present, no upgrade support yet.")
+
+    with open(path, "w") as f:
+        f.write(yaml_dump(config))
 
 
 if __name__ == "__main__":
