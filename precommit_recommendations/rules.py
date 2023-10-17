@@ -121,5 +121,5 @@ def validate_cff(ctx):
 
 @rule
 def validate_pyproject(ctx):
-    if ctx.filename_exist("pyproject.toml"):
+    if ctx.filename_exists("pyproject.toml"):
         return "validate-pyproject"

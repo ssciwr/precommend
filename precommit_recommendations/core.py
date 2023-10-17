@@ -1,8 +1,9 @@
+import copy
 import functools
 import os
+import strictyaml
 
 from pre_commit.git import get_all_files
-from pre_commit.yaml import yaml_load
 from identify.identify import tags_from_path
 
 
@@ -38,33 +39,36 @@ def collect_hooks(ctx):
     return hooks
 
 
-def parse_hooks():
+def generate_config(hooks):
     with open(
         os.path.join(os.path.dirname(__file__), ".pre-commit-config.yaml"), "r"
     ) as f:
-        data = yaml_load(f.read())
-    hooks = {}
+        data = strictyaml.load(f.read())
+    output = copy.deepcopy(data)
+
+    def _remove_hook(hook_id):
+        for i, orepo in enumerate(output["repos"]):
+            for j, ohook in enumerate(orepo["hooks"]):
+                if ohook.value["id"] == hook_id:
+                    del output["repos"][i]["hooks"][j]
+                    return
+
+    # Iterate the original data and remove hooks
     for repo in data["repos"]:
         for hook in repo["hooks"]:
-            hooks[hook["id"]] = (repo["repo"], repo["rev"], hook)
-    return hooks
+            if hook.value["id"] not in hooks:
+                _remove_hook(hook.value["id"])
 
+    output2 = copy.deepcopy(output)
 
-def add_and_return_repo(data, repo, rev):
-    for r in data["repos"]:
-        if r["repo"] == repo:
-            return r
-    data["repos"].append({"repo": repo, "rev": rev})
-    return data["repos"][-1]
+    def _remove_repo(repo_url):
+        for i, repo in enumerate(output2["repos"]):
+            if repo.value["repo"] == repo_url:
+                del output2["repos"][i]
+                return
 
+    for repo in output["repos"]:
+        if len(repo["hooks"].value) == 0:
+            _remove_repo(repo.value["repo"])
 
-def generate_config(hooks):
-    hookinfo = parse_hooks()
-    data = {}
-    data["repos"] = []
-    for hook in sorted(hooks):
-        repo, rev, hookconfig = hookinfo[hook]
-        repoconfig = add_and_return_repo(data, repo, rev)
-        repoconfig.setdefault("hooks", [])
-        repoconfig["hooks"].append(hookconfig)
-    return data
+    return output2

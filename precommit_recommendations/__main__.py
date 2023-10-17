@@ -1,4 +1,3 @@
-from pre_commit.yaml import yaml_dump
 from precommit_recommendations.core import (
     collect_hooks,
     generate_config,
@@ -16,7 +15,7 @@ def main():
         raise IOError("Pre-commit config already present, no upgrade support yet.")
 
     with open(path, "w") as f:
-        f.write(yaml_dump(config))
+        f.write(config.as_yaml())
 
 
 if __name__ == "__main__":

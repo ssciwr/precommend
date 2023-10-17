@@ -30,6 +30,7 @@ dependencies = [
     "click",
     "identify",
     "pre-commit",
+    "strictyaml",
 ]
 
 [project.optional-dependencies]
