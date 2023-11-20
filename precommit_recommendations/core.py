@@ -44,6 +44,9 @@ def generate_config(hooks):
         os.path.join(os.path.dirname(__file__), ".pre-commit-config.yaml"), "r"
     ) as f:
         data = strictyaml.load(f.read())
+
+    # NB: The deepcopy's here might seem unnecessary, but they are required
+    # because modification of strictyaml objects is a difficult process.
     output = copy.deepcopy(data)
 
     def _remove_hook(hook_id):
