@@ -37,3 +37,5 @@ jobs:
         id: "tag_create"
         with:
           tag: ${{ steps.get_next_tag.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
