@@ -1,0 +1,32 @@
+name: Automatically bump the package version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+
+      - name: Install dependencies
+        run: |
+          pip install setuptools_scm
+
+      - name: Figure out the next tag
+        shell: python
+        id: get_next_tag
+        run: |
+          import setuptools_scm
+          from packaging import version
+          v = version.parse(setuptools_scm.get_version())
+          print(f"::set-output tag=v{v.major}.{v.minor + 1}.0")
+
+      - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: ${{ steps.get_next_tag.outputs.tag }}
