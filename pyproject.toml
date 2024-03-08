@@ -12,8 +12,8 @@ build-backend = "setuptools.build_meta"
 # a variety of build tools. Notably, the version specified here is the
 # single source of truth for precommit_recommendations's version
 [project]
-name = "precommit_recommendations"
-description = "Add short description here"
+name = "precommend"
+description = "Opinionated initialization of pre-commit configurations"
 readme = "README.md"
 maintainers = [
     { name = "Dominic Kempf", email = "ssc@iwr.uni-heidelberg.de" },
@@ -40,14 +40,14 @@ tests = [
 
 # Command line scripts installed as part of the installation
 [project.scripts]
-precommit_recommendations = "precommit_recommendations.__main__:main"
+precommend = "precommend.__main__:main"
 
 # The following section contains setuptools-specific configuration
 # options. For a full reference of available options, check the overview
 # at https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 [tool.setuptools]
 packages = [
-    "precommit_recommendations",
+    "precommend",
 ]
 
 # Configure setuptools_scm, which extracts the version number from
@@ -56,7 +56,7 @@ packages = [
 [tool.setuptools_scm]
 version_scheme = "post-release"
 local_scheme = "node-and-date"
-write_to = "precommit_recommendations/_version.py"
+write_to = "precommend/_version.py"
 
 # The following is the configuration for the pytest test suite
 [tool.pytest.ini_options]

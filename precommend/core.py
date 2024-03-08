@@ -29,7 +29,7 @@ class GenerationContext:
 
 
 def collect_hooks(ctx):
-    from precommit_recommendations.rules import _rules
+    from precommend.rules import _rules
 
     hooks = []
     for rule in _rules:

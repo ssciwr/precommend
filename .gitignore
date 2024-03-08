@@ -1,5 +1,5 @@
 # Ignore setuptools_scm generated version file
-precommit_recommendations/_version.py
+precommend/_version.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,4 +1,4 @@
-from precommit_recommendations.core import *
+from precommend.core import *
 
 
 def test_collect_hooks_python(monkeypatch, python_data):

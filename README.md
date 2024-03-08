@@ -1,18 +1,16 @@
-# Welcome to precommit-recommendations
+# Welcome to precommend
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This a small utility that creates a `.pre-commit-config.yaml` based on the files
-in your current working directory and the recommendations of the Scientific Software Center.
+`precommend` bootstraps [pre-commit](https://pre-commit.com) configurations based
+on the content of your project and the recommendations of the [Scientific Software Center](https://ssc.uni-heidelberg.de).
 
 ## Installation
 
 The Python package can be installed with
 
 ```
-git clone https://github.com/ssciwr/precommit-recommendations.git
-cd precommit-recommendations
-python -m pip install .
+python -m pip install precommend
 ```
 
 ## Usage
@@ -20,7 +18,7 @@ python -m pip install .
 Head to a directory that you want to add a config file to and run
 
 ```bash
-precommit_recommendations
+precommend
 ```
 
 ## Acknowledgments
