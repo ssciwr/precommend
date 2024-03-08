@@ -28,6 +28,9 @@ jobs:
           v = version.parse(setuptools_scm.get_version())
           print(f"::set-output tag=v{v.major}.{v.minor + 1}.0")
 
+      - name: Debug the next tag
+        run: echo ${{ steps.get_next_tag.outputs.tag }}
+
       - uses: rickstaa/action-create-tag@v1
         id: "tag_create"
         with:
