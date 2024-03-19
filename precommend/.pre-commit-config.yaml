@@ -54,6 +54,8 @@ repos:
     hooks:
       # Apply formatting to CMake files
       - id: cmake-format
+        additional_dependencies:
+        - pyyaml
       # Apply linting to CMake files
       - id: cmake-lint
 
