@@ -30,7 +30,7 @@ dependencies = [
     "click",
     "identify",
     "pre-commit",
-    "strictyaml",
+    "ruamel.yaml",
 ]
 
 [project.optional-dependencies]
