@@ -10,7 +10,9 @@ from identify.identify import tags_from_path
 class GenerationContext:
     def __init__(self):
         self._path = os.path.realpath(".")
-        self._files = get_all_files()
+        # We use get_all_files from pre-commit as it respects .gitignore, but
+        # we need to filter out files that do not exist in the working copy.
+        self._files = [f for f in get_all_files() if os.path.exists(f)]
         self._tags = functools.reduce(
             lambda a, b: a.union(b), map(tags_from_path, self._files), set()
         )
