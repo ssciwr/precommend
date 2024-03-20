@@ -1,92 +1,75 @@
+# This file contains all the hooks that precommend would ever recommend to users.
+# They are kept in this file in order to allow pre-commit CI to update them on a
+# regular basis. If you want to add a new hook, add it here and then add a corresponding
+# inclusion rule in rules.py. Note that YAML parsing with comment preservation is
+# a fickle issue: Only end-of-line comments are safe to use with our toolchain.
+
 repos:
   - repo: https://github.com/psf/black
     rev: 23.9.1
     hooks:
-      # Run Black - the uncompromising Python code formatter
-      - id: black
-      # Run Black - the uncompromising Python code formatter (Jupyter version)
-      - id: black-jupyter
+      - id: black  # Run Black - the uncompromising Python code formatter
+      - id: black-jupyter  # Run Black - the uncompromising Python code formatter (Jupyter version)
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
-      # Ensure existence of newline characters at file ends
-      - id: end-of-file-fixer
-      # Make sure that contained YAML files are well-formed
-      - id: check-yaml
-      # Trim trailing whitespace of all sorts
-      - id: trailing-whitespace
-      # Apply a file size limit of 500kB
-      - id: check-added-large-files
-      # Simple parser validation of e.g. pyproject.toml
-      - id: check-toml
-      # Unify file endings
-      - id: end-of-file-fixer
-      # Sort lines in requirements files
-      - id: requirements-txt-fixer
-            # Check validity of JSON files
-      - id: check-json
-      # Format JSON files consistently
-      - id: pretty-format-json
+      - id: end-of-file-fixer  # Ensure existence of newline characters at file ends
+      - id: check-yaml  # Make sure that contained YAML files are well-formed
+      - id: trailing-whitespace  # Trim trailing whitespace of all sorts
+      - id: check-added-large-files  # Apply a file size limit of 500kB
+      - id: check-toml  # Simple parser validation of e.g. pyproject.toml
+      - id: requirements-txt-fixer  # Sort lines in requirements files
+      - id: check-json  # Check validity of JSON files
+      - id: pretty-format-json  # Format JSON files consistently
         exclude_types:
           - jupyter
         args:
           - --autofix
-      # Ensure consistent line endings
-      - id: mixed-line-ending
+      - id: mixed-line-ending  # Ensure consistent line endings
 
   - repo: https://github.com/rhysd/actionlint
     rev: v1.6.25
     hooks:
-      # GitHub Actions Workflow linter
-      - id: actionlint
+      - id: actionlint  # GitHub Actions Workflow linter
 
   - repo: https://github.com/kynan/nbstripout
     rev: 0.6.1
     hooks:
-      # Make sure that Jupyter notebooks under version control
-      # have their outputs stripped before committing
-      - id: nbstripout
+      - id: nbstripout # Make sure that Jupyter notebooks under version control have their outputs stripped before committing
         files: ".ipynb"
 
   - repo: https://github.com/cheshirekow/cmake-format-precommit
     rev: v0.6.13
     hooks:
-      # Apply formatting to CMake files
-      - id: cmake-format
+      - id: cmake-format  # Apply formatting to CMake files
         additional_dependencies:
-        - pyyaml
-      # Apply linting to CMake files
-      - id: cmake-lint
+          - pyyaml
+      - id: cmake-lint  # Apply linting to CMake files
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
     rev: v16.0.6
     hooks:
-      # Format C++ code with Clang-Format - automatically applying the changes
-      - id: clang-format
+      - id: clang-format  # Format C++ code with Clang-Format - automatically applying the changes
         args:
         - --style=Mozilla
 
   - repo: https://github.com/asottile/setup-cfg-fmt
     rev: v2.5.0
     hooks:
-      # Automatically format/sanitize setup.cfg
-      - id: setup-cfg-fmt
+      - id: setup-cfg-fmt  # Automatically format/sanitize setup.cfg
 
   - repo: https://github.com/citation-file-format/cffconvert
     rev: main
     hooks:
-      # Validate CFF format
-      - id: validate-cff
+      - id: validate-cff # Validate CFF format
 
   - repo: https://github.com/lovesegfault/beautysh
     rev: v6.2.1
     hooks:
-      # Beautify Bash scripts
-      - id: beautysh
+      - id: beautysh  # Beautify Bash scripts
 
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.15
     hooks:
-      # Validate the contents of pyproject.toml
-      - id: validate-pyproject
+      - id: validate-pyproject  # Validate the contents of pyproject.toml

@@ -5,6 +5,7 @@ from precommend.core import (
 )
 
 import os
+import ruamel.yaml
 
 
 def main():
@@ -14,8 +15,9 @@ def main():
     if os.path.exists(path):
         raise IOError("Pre-commit config already present, no upgrade support yet.")
 
+    yaml = ruamel.yaml.YAML()
     with open(path, "w") as f:
-        f.write(config.as_yaml())
+        yaml.dump(config, f)
 
 
 if __name__ == "__main__":
