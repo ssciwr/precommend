@@ -5,6 +5,15 @@
 # a fickle issue: Only end-of-line comments are safe to use with our toolchain.
 
 repos:
+  - repo: local
+    hooks:
+      - id: synchronize-files
+        name: Synchronize files within the repository
+        entry: python sync.py
+        language: system
+        always_run: true
+        pass_filenames: false
+
   - repo: https://github.com/psf/black
     rev: 24.3.0
     hooks:
