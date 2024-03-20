@@ -1,7 +1,7 @@
 import copy
 import functools
 import os
-import strictyaml
+import ruamel.yaml
 
 from pre_commit.git import get_all_files
 from identify.identify import tags_from_path
@@ -40,38 +40,30 @@ def collect_hooks(ctx):
 
 
 def generate_config(hooks):
+    # Load all available hooks
+    yaml = ruamel.yaml.YAML()
     with open(
         os.path.join(os.path.dirname(__file__), ".pre-commit-config.yaml"), "r"
     ) as f:
-        data = strictyaml.load(f.read())
+        data = yaml.load(f)
 
-    # NB: The deepcopy's here might seem unnecessary, but they are required
-    # because modification of strictyaml objects is a difficult process.
-    output = copy.deepcopy(data)
+    # Ruamel types to use in constructing the output
+    CS = ruamel.yaml.comments.CommentedSeq
+    CM = ruamel.yaml.comments.CommentedMap
 
-    def _remove_hook(hook_id):
-        for i, orepo in enumerate(output["repos"]):
-            for j, ohook in enumerate(orepo["hooks"]):
-                if ohook.value["id"] == hook_id:
-                    del output["repos"][i]["hooks"][j]
-                    return
-
-    # Iterate the original data and remove hooks
+    # The output data structure
+    final = CM(repos=CS())
     for repo in data["repos"]:
-        for hook in repo["hooks"]:
-            if hook.value["id"] not in hooks:
-                _remove_hook(hook.value["id"])
+        # If no hook of this repo matches, it is never added to the output
+        if set(h["id"] for h in repo["hooks"]).intersection(hooks):
+            repo_hooks = repo.pop("hooks")
+            hook_list = CS()
+            for hook in repo_hooks:
+                if hook["id"] in hooks:
+                    hook_list.append(hook)
 
-    output2 = copy.deepcopy(output)
+            repo_map = CM(**repo)
+            repo_map["hooks"] = hook_list
+            final["repos"].append(repo_map)
 
-    def _remove_repo(repo_url):
-        for i, repo in enumerate(output2["repos"]):
-            if repo.value["repo"] == repo_url:
-                del output2["repos"][i]
-                return
-
-    for repo in output["repos"]:
-        if len(repo["hooks"].value) == 0:
-            _remove_repo(repo.value["repo"])
-
-    return output2
+    return final

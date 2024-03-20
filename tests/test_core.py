@@ -4,7 +4,6 @@ from precommend.core import *
 def test_collect_hooks_python(monkeypatch, python_data):
     monkeypatch.chdir(python_data)
     ctx = GenerationContext()
-    print(ctx._files)
     hooks = collect_hooks(ctx)
 
     assert "black" in hooks
@@ -26,10 +25,10 @@ def test_generate_config_python(monkeypatch, tmp_path, python_data):
     hooks = collect_hooks(ctx)
 
     monkeypatch.chdir(str(tmp_path))
-    output = generate_config(hooks).as_yaml()
+    output = generate_config(hooks)
 
-    assert "black" in output
-    assert "validate-pyproject" in output
+    assert "black" in str(output)
+    assert "validate-pyproject" in str(output)
 
 
 def test_generate_config_python(monkeypatch, tmp_path, cpp_data):
@@ -38,7 +37,7 @@ def test_generate_config_python(monkeypatch, tmp_path, cpp_data):
     hooks = collect_hooks(ctx)
 
     monkeypatch.chdir(str(tmp_path))
-    output = generate_config(hooks).as_yaml()
+    output = generate_config(hooks)
 
-    assert "clang-format" in output
-    assert "cmake-format" in output
+    assert "clang-format" in str(output)
+    assert "cmake-format" in str(output)
