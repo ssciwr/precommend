@@ -4,11 +4,19 @@ from precommend.core import (
     GenerationContext,
 )
 
+import click
 import os
 import ruamel.yaml
 
 
+@click.command()
 def main():
+    """Generate a pre-commit config file
+
+    Run at the root of a git repository to generate a pre-commit config file.
+    The generated file is based on the contents of your repository and the
+    recommendations of the Scientific Software Center at Heidelberg University.
+    """
     ctx = GenerationContext()
     config = generate_config(collect_hooks(ctx))
     path = os.path.join(os.getcwd(), ".pre-commit-config.yaml")
