@@ -34,6 +34,18 @@ def check_json(ctx):
 
 
 @rule
+def check_dependabot(ctx):
+    if ctx.filename_exists(".github/dependabot.yml"):
+        return "check-dependabot"
+
+
+@rule
+def check_readthedocs(ctx):
+    if ctx.filename_exists(".readthedocs.yml"):
+        return "check-readthedocs"
+
+
+@rule
 def check_toml(ctx):
     if ctx.tag_exists("toml"):
         return "check-toml"
