@@ -12,3 +12,4 @@ def dir_fixture(name):
 
 python_data = dir_fixture("python")
 cpp_data = dir_fixture("cpp")
+generic_data = dir_fixture("generic")
