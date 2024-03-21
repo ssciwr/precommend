@@ -60,6 +60,7 @@ repos:
     rev: v18.1.1
     hooks:
       - id: clang-format  # Format C++ code with Clang-Format - automatically applying the changes
+        types_or: [c++, c, c#, cuda, objective-c]
         args:
         - --style=Mozilla
 
