@@ -96,3 +96,6 @@ repos:
     hooks:
       - id: check-readthedocs  # Validate the given .readthedocs.yml file
       - id: check-dependabot  # Validate the given dependabot.yml file
+
+ci:
+  skip: [bump-precommit-and-identify]
