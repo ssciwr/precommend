@@ -81,10 +81,10 @@ repos:
     hooks:
       - id: validate-cff # Validate CFF format
 
-  - repo: https://github.com/lovesegfault/beautysh
-    rev: v6.2.1
+  - repo: https://github.com/pecigonzalo/pre-commit-shfmt
+    rev: v2.2.0
     hooks:
-      - id: beautysh  # Beautify Bash scripts
+      - id: shell-fmt-go  # Format Bash scripts
 
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.16
