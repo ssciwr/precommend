@@ -10,13 +10,14 @@ repos:
       - id: synchronize-files
         name: Synchronize files within the repository
         entry: python sync.py
-        language: system
+        language: python
         always_run: true
         pass_filenames: false
       - id: bump-precommit-and-identify
         name: Bump versions of pre-commit and identify
         entry: python bump_identify.py
-        language: system
+        language: python
+        additional_dependencies: [requests]
         always_run: true
         pass_filenames: false
 
@@ -95,3 +96,6 @@ repos:
     hooks:
       - id: check-readthedocs  # Validate the given .readthedocs.yml file
       - id: check-dependabot  # Validate the given dependabot.yml file
+
+ci:
+  skip: [bump-precommit-and-identify]
