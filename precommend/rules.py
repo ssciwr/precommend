@@ -14,9 +14,9 @@ def actionlint(ctx):
 
 
 @rule
-def beautysh(ctx):
-    if ctx.tag_exists("bash"):
-        return "beautysh"
+def shell_fmt_go(ctx):
+    if ctx.tag_exists("shell") or ctx.tag_exists("bash"):
+        return "shell-fmt-go"
 
 
 @rule
