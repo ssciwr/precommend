@@ -12,6 +12,9 @@ def actionlint(ctx):
     if ctx.directory_exists(".github/workflows"):
         return "actionlint"
 
+    if ctx.filename_exists("action.yml"):
+        return "actionlint"
+
 
 @rule
 def shell_fmt_go(ctx):
