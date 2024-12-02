@@ -92,7 +92,7 @@ repos:
       - id: validate-pyproject  # Validate the contents of pyproject.toml
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.29.4
+    rev: 0.30.0
     hooks:
       - id: check-readthedocs  # Validate the given .readthedocs.yml file
       - id: check-dependabot  # Validate the given dependabot.yml file
