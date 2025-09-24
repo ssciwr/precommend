@@ -1,10 +1,52 @@
-import copy
 import functools
 import os
 import ruamel.yaml
+import subprocess
 
-from pre_commit.git import get_all_files
 from identify.identify import tags_from_path
+
+
+class NotAGitRepositoryError(Exception):
+    """Raised when the current directory is not a Git repository."""
+
+
+def get_all_files():
+    """Yield tracked + untracked-but-unignored files in a Git repo."""
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--is-inside-work-tree"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        if result.stdout.strip() != "true":
+            raise NotAGitRepositoryError(
+                f"precommend needs to be run in a Git repository"
+            )
+    except subprocess.CalledProcessError:
+        raise NotAGitRepositoryError(f"precommend needs to be run in a Git repository")
+
+    # Tracked files
+    tracked = subprocess.Popen(
+        ["git", "ls-files", "--cached"],
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    for line in tracked.stdout:
+        yield line.strip()
+
+    tracked.wait()
+
+    # Untracked but unignored files
+    untracked = subprocess.Popen(
+        ["git", "ls-files", "--others", "--exclude-standard"],
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    for line in untracked.stdout:
+        yield line.strip()
+
+    untracked.wait()
 
 
 class GenerationContext:

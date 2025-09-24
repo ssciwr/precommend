@@ -28,8 +28,8 @@ classifiers = [
 ]
 dependencies = [
     "click",
-    "identify >= 2.5.36",
-    "pre-commit >= 3.7.1",
+    "identify >= 2.6.14",
+    "pre-commit >= 4.3.0",
     "ruamel.yaml",
 ]
 
