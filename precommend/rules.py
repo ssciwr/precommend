@@ -138,3 +138,9 @@ def validate_cff(ctx):
 def validate_pyproject(ctx):
     if ctx.filename_exists("pyproject.toml"):
         return "validate-pyproject"
+
+
+@rule
+def validate_ocrd_tool(ctx):
+    if ctx.filename_exists("ocrd-tool.json"):
+        return "validate-ocrd-tool"
