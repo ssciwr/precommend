@@ -92,10 +92,14 @@ repos:
       - id: validate-pyproject  # Validate the contents of pyproject.toml
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.34.0
+    rev: 0.35.0
     hooks:
       - id: check-readthedocs  # Validate the given .readthedocs.yml file
       - id: check-dependabot  # Validate the given dependabot.yml file
+      - id: check-jsonschema
+        args:
+        - --schemafile=https://raw.githubusercontent.com/OCR-D/core/refs/heads/master/src/ocrd_validators/ocrd_tool.schema.yml
+        files: ocrd-tool.json
 
 ci:
   skip: [bump-precommit-and-identify]
