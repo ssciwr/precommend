@@ -22,7 +22,7 @@ repos:
         pass_filenames: false
 
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 25.11.0
+    rev: 26.1.0
     hooks:
       - id: black  # Run Black - the uncompromising Python code formatter
       - id: black-jupyter  # Run Black - the uncompromising Python code formatter (Jupyter version)
@@ -45,12 +45,12 @@ repos:
       - id: mixed-line-ending  # Ensure consistent line endings
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.8
+    rev: v1.7.11
     hooks:
       - id: actionlint  # GitHub Actions Workflow linter
 
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.8.2
+    rev: 0.9.1
     hooks:
       - id: nbstripout # Make sure that Jupyter notebooks under version control have their outputs stripped before committing
         files: ".ipynb"
@@ -64,7 +64,7 @@ repos:
       - id: cmake-lint  # Apply linting to CMake files
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v21.1.5
+    rev: v21.1.8
     hooks:
       - id: clang-format  # Format C++ code with Clang-Format - automatically applying the changes
         types_or: [c++, c, c#, cuda, objective-c]
@@ -72,7 +72,7 @@ repos:
         - --style=Mozilla
 
   - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v3.1.0
+    rev: v3.2.0
     hooks:
       - id: setup-cfg-fmt  # Automatically format/sanitize setup.cfg
 
@@ -87,12 +87,12 @@ repos:
       - id: shell-fmt-go  # Format Bash scripts
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.24.1
+    rev: v0.25
     hooks:
       - id: validate-pyproject  # Validate the contents of pyproject.toml
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.35.0
+    rev: 0.36.2
     hooks:
       - id: check-readthedocs  # Validate the given .readthedocs.yml file
       - id: check-dependabot  # Validate the given dependabot.yml file
