@@ -2,7 +2,6 @@ import hashlib
 import os
 import shutil
 
-
 # Check whether we need to copy the config file
 if (
     not os.path.exists("precommend/.pre-commit-config.yaml")
